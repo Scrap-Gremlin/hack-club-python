@@ -8,10 +8,12 @@ b_input = ""
 budget = b_input
 or1 = 0
 or2 = 0
+out1 = 0
+out2 = 0
 # Lists
 items = [("Cheese",8), ("Veggie",12), ("Hawaiian",12), ("Pepperoni",10), ("Sausage",10), ("Buffalo Chicken",12), ("",0)]
 item_names = ["cheese", "veggie", "hawaiian", "pepperoni", "sausage", "buffalo chicken"]
-stock = (15, 25, 35, 45, 55, 65)
+stock = [5, 5, 5, 5, 5, 5]
 # Functions
 def order_exist(a):
     if a == "hawaiian":
@@ -41,11 +43,12 @@ def is_in(a,b):
         return True
     else:
         return False
-def stock_take(a,b):
-    if tuple(a,5) in b:
-        print("yes")
+def stock_take(a):
+    if stock[a] != 0:
+        stock[a] = stock[a] - 1
+        return True
     else:
-        print("no")
+        return False
 print("       MARIO'S    PIZZA       ")
 print(line)
 print("        PIZZA     MENU        ")
@@ -72,30 +75,45 @@ while isinstance(budget, str):
 while True:
     or1 = 0
     or2 = 0
-    print(pizzas)
     print(line)
     print(f"Your budget is ${budget}")
     while or1 == 0:
+        if out1 == 1:
+            print("Sorry, we are out of that item.\nPlease order again.")
         order1 = input("What kind of pizza would you like? ").lower().replace("#", "")
         if order1[0] in num_ords:
-            order1i = int(order1[0]) - 1
-            or1 = 1
+            order1i = (int(order1[0])) - 1
+            if stock_take(order1i + 1) == True:
+                or1 = 1
+            elif stock_take(order1i) == False:
+                out1 = 1
         elif order1[0] in let_ords and is_in(order1[1],let_ords2):
             order1i = let_ords.index(order1[0])
-            or1 = 1
+            if stock_take(order1i) == True:
+                or1 = 1
+            elif stock_take(order1i) == False:
+                oit1 = 1
         else:
             print("Sorry, we can't make that.")
     while or2 == 0:
+        if out2 == 1:
+            print("Sorry, we are out of that item.\nPlease order again")
         order2 = input("Anything else? ").lower().replace("#", "")        
         if order_exist(order2) == True:
             if order2[0] in num_ords:
                 order2i = int(order2[0]) - 1
-                or2 = 1
+                if stock_take(order2i + 1) == True:
+                    print(stock)
+                    or2 = 1
+                elif stock_take(order2i) == False:
+                    out2 = 1
             elif order2[0] in let_ords and is_in(order2[1],let_ords2):
                 order2i = let_ords.index(order2[0])
-                or2 = 1
+                if stock_take(order2i) == True:
+                    or2 = 1
+                elif stock_take(order2i) == False:
+                    out2 = 1
             else:
-                or2 = 0
                 print("Can you repeat that?")
         else:
             order2i = (7)
