@@ -72,6 +72,7 @@ while isinstance(budget, str):
 while True:
     or1 = 0
     or2 = 0
+    print(pizzas)
     print(line)
     print(f"Your budget is ${budget}")
     while or1 == 0:
@@ -126,9 +127,15 @@ while True:
     elif budget < 0:
         print("Sorry, you don't have enough money. You can't pay for that.")
         budget = l_budget
-        if order_exist(input("Would you like to reorder? (y/n) ").lower()) == False:
+        again = order_exist(input("Would you like to reorder? (y/n) ").lower())
+        if again == False:
+            pizzas.remove(p_type(order1i))
+            pizzas.remove(p_type(order2i))
             print(end)
             break
+        elif again == True:
+            pizzas.remove(p_type(order1i))
+            pizzas.remove(p_type(order2i))
     elif order_exist(input("New order? (y/n) ").lower()) == False:
         print(end)
         break
