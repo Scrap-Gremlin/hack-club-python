@@ -11,7 +11,7 @@ or2 = 0
 # Lists
 items = [("Cheese",8), ("Veggie",12), ("Hawaiian",12), ("Pepperoni",10), ("Sausage",10), ("Buffalo Chicken",12), ("",0)]
 item_names = ["cheese", "veggie", "hawaiian", "pepperoni", "sausage", "buffalo chicken"]
-stock = (("veggie",5), ("pepperoni",5), ("cheese",5), ("buffalo",5), ("hawaiian",5), ("sausage",5))
+stock = (15, 25, 35, 45, 55, 65)
 # Functions
 def order_exist(a):
     if a == "hawaiian":
