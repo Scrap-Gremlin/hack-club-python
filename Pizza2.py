@@ -44,10 +44,11 @@ def is_in(a,b):
     else:
         return False
 def stock_take(a):
-    if stock[a] <= 0:
+    if stock[a] > 0:
         stock[a] = stock[a] - 1
         return True
     else:
+        stock[a] = 0
         return False
 print("       MARIO'S    PIZZA       ")
 print(line)
@@ -80,10 +81,12 @@ while True:
     while or1 == 0:
         if out1 == 1:
             print("Sorry, we are out of that item.\nPlease order again.")
+        else:
+            print("no")
         order1 = input("What kind of pizza would you like? ").lower().replace("#", "")
         if order1[0] in num_ords:
             order1i = (int(order1[0])) - 1
-            if stock_take(order1i + 1) == True:
+            if stock_take(order1i) == True:
                 or1 = 1
             elif stock_take(order1i) == False:
                 out1 = 1
@@ -102,15 +105,17 @@ while True:
         if order_exist(order2) == True:
             if order2[0] in num_ords:
                 order2i = int(order2[0]) - 1
-                if stock_take(order2i + 1) == True:
+                if stock_take(order2i) == True:
                     print(stock)
                     or2 = 1
                 elif stock_take(order2i) == False:
+                    out2 = 1
             elif order2[0] in let_ords and is_in(order2[1,let_ords2]):
                 order2i = let_ords.index(order2[0])
                 if stock_take(order2i) == True:
                     or2 = 1
                 elif stock_take(order2i) == False:
+                    out2 = 1
             else:
                 print("Can you repeat that?")
         else:
@@ -139,6 +144,9 @@ while True:
     end = f"Bye! Have a great day!\nPizzas you have bought:{pizzas}"
     if budget == 0:
         print(end)
+        out1 = 0
+        out2 = 0
+        stock = [5, 5, 5, 5, 5, 5]
         break
     elif budget < 0:
         print("Sorry, you don't have enough money. You can't pay for that.")
@@ -148,10 +156,16 @@ while True:
             pizzas.remove(p_type(order1i))
             pizzas.remove(p_type(order2i))
             print(end)
+            out1 = 0
+            out2 = 0
+            stock = [5, 5, 5, 5, 5, 5]
             break
         elif again == True:
             pizzas.remove(p_type(order1i))
             pizzas.remove(p_type(order2i))
     elif order_exist(input("New order? (y/n) ").lower()) == False:
         print(end)
+        out1 = 0
+        out2 = 0
+        stock = [5, 5, 5, 5, 5, 5]
         break
