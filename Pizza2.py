@@ -44,7 +44,7 @@ def is_in(a,b):
     else:
         return False
 def stock_take(a):
-    if stock[a] != 0:
+    if stock[a] <= 0:
         stock[a] = stock[a] - 1
         return True
     else:
@@ -92,7 +92,7 @@ while True:
             if stock_take(order1i) == True:
                 or1 = 1
             elif stock_take(order1i) == False:
-                oit1 = 1
+                out1 = 1
         else:
             print("Sorry, we can't make that.")
     while or2 == 0:
@@ -106,13 +106,11 @@ while True:
                     print(stock)
                     or2 = 1
                 elif stock_take(order2i) == False:
-                    out2 = 1
-            elif order2[0] in let_ords and is_in(order2[1],let_ords2):
+            elif order2[0] in let_ords and is_in(order2[1,let_ords2]):
                 order2i = let_ords.index(order2[0])
                 if stock_take(order2i) == True:
                     or2 = 1
                 elif stock_take(order2i) == False:
-                    out2 = 1
             else:
                 print("Can you repeat that?")
         else:
